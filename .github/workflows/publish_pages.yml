@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - resume.tex
+      - web/template.html
 
 permissions:
   contents: write
