@@ -1,4 +1,4 @@
-name: Build Resume
+name: Publish Resume to GH Pages
 
 on:
   push:
@@ -29,6 +29,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./web  # or specify a folder if needed
-          publish_branch: gh-pages
-          # You might want to publish only resume.html if that is all you need
+          publish_dir: ./web
