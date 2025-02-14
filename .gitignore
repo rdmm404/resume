@@ -1,9 +1,0 @@
-*
-!*.pdf
-!*.tex
-!*.md
-!*.html
-!.gitignore
-!.github/
-!.github/**
-!web
