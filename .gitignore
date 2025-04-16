@@ -6,3 +6,4 @@
 **/*.synctex.gz
 **/*.synctex
 .DS_Store
+web
