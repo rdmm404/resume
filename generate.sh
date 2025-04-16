@@ -19,5 +19,8 @@ for tex_file in resumes/*.tex; do
     fi
 
     echo "Converting $tex_file to $output_file"
-    pandoc -s "$tex_file" --template template.html -o "$output_file"
+    pandoc -s "$tex_file" \
+        --template template.html \
+        -V "pdf_name=$filename" \
+        -o "$output_file"
 done
