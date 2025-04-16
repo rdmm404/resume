@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - resume.tex
-      - web/template.html
+      - 'resumes/*.tex'
+      - 'template.html'
 
 permissions:
   contents: write
@@ -26,7 +26,9 @@ jobs:
           sudo apt-get install -y pandoc
 
       - name: Convert LaTeX to HTML
-        run: pandoc -s resume.tex --template web/template.html -o web/index.html
+        run: |
+          chmod +x generate.sh
+          ./generate.sh
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
