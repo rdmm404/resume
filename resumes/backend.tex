@@ -26,35 +26,49 @@
 
 % Professional Summary
 \subsection*{Summary}
-Software Engineer with 3+ years of experience designing and building scalable, cloud-native backend microservices.
-Proven ability delivering robust, containerized solutions optimized for performance and reliability
-by leveraging expertise in API design, database management, and CI/CD automation. A quick learner
-known for rapidly adapting to new projects and technologies. Seeking a challenging role in a fast-paced,
-collaborative environment that offers meaningful work and opportunities for continuous growth.
+Software Engineer with 4+ years of experience designing scalable, cloud-native backend microservices.
+Skilled at building reliable distributed systems with Python, Go, API design, database optimization,
+observability, and CI/CD automation.
 % Work Experience
 \subsection*{Work Experience}
 
 \subsubsection*{%
-  \textbf{Software Engineer} at \href{https://www.achievers.com/}{Achievers}, Toronto
+  \textbf{Intermediate Software Engineer} at \href{https://www.achievers.com/}{Achievers}, Toronto
   \hfill
-  \textit{November 2022 - Present}
+  \textit{October 2025 - Present}
 }
 \begin{itemize}
-  \item Designed, developed, and maintained cloud-based Python microservices, implementing best practices
-    for scalability, fault tolerance, and data consistency in a distributed environment.
-  \item Created and maintained reusable GraphQL endpoints, using Fastify, Node.js and TypeScript. These served as a gateway and data
-    aggregation layer between gRPC microservice endpoints, legacy REST API endpoints and the front-end application.
-  \item Utilized Google Cloud Platform (GCP) services including Kubernetes Engine, Artifact Registry,
-    Pub/Sub, gRPC, Cloud Storage Buckets, and Secret Manager for application deployment, communication, and storage.
-  \item Maintained highly available order processing and vendor integration services for a marketplace platform
-    handling 10+ orders/min (\$10M+ 2024 revenue). Resolved critical production issues within SLAs as part of an Agile Scrum team.
-  \item Contributed significantly to integrating external services APIs---such as Netsuite and Akeneo--- into our platform to streamline
-    business processes, improving efficiency in the product merchandising pipeline by 66.6\%.
-  \item Optimized database operations by migrating expensive MySQL queries to read-only replicas after identifying
-    bottlenecks during execution. Increased performance in microservice endpoints by implementing caching layers
-    using Redis.
-  \item Developed a proof of concept for CI/CD pipeline optimization that demonstrated
-    a 50\% reduction in build times, leading to a company-wide adoption.
+  \item Design, develop, and maintain cloud-based Python and Go microservices for a global B2B SaaS, using GCP, gRPC, Pub/Sub, and Kubernetes (GKE) for scalable service communication and deployment.
+  \item Contributed heavily to design and implementation of a resilient top-up checkout workflow, building Python backend flows, a Go-based Avalara tax integration, Stripe payment handling, and saga-style distributed transaction coordination.
+  % Add captured revenue metric once available.
+  % Interview details: fallback polling jobs, checkout queue state machine, Pub/Sub redelivery, DLT management,
+  % UUID deduplication, simultaneous checkout locks across devices, abort/refund paths.
+  % TODO: Consider splitting into design + implementation bullets for payment/platform-focused roles.
+  \item Contributed to Elasticsearch indexing pipeline simplification, helping evaluate architecture tradeoffs and implementing Go batch processor workers, queue tuning, and Airflow/Dataflow orchestration changes that reduced cluster CPU by ~30\% and memory pressure by ~20\% while keeping search latency under 200ms.
+  % \item Partnered with SRE to optimize Elasticsearch index mappings by removing unused indexed fields, correcting data types,
+  %   and preventing unwanted extra fields, reducing UAT cluster memory pressure by 50\%+ ahead of production rollout.
+  \item Built internal AI tooling with a RAG pipeline and MCP server for vendor API documentation, retrieval, and JSON config validation, reducing vendor integration timelines from 4 weeks to 3 and helping the team exceed its annual integration goal by 20\% (12/10).
+  \item Improved New Relic observability for Elasticsearch data sync queues with custom queue-state events, backlog alerts, and dashboards; implementation pattern was later standardized in the shared batch processing library.
+  \item Mentored 2 co-op software engineers through onboarding and project delivery, providing code reviews, pair programming support, and technical guidance across marketplace backend services.
+  % Optional AI leadership bullet:
+  % \item Contributed marketplace-focused AI skills and checkout triage runbooks to an internal skill marketplace,
+  %   and hosted team knowledge-transfer sessions to improve AI-assisted development and production support workflows.
+  % TODO: Uncomment once shipped.
+  % \item Improved checkout observability by tagging New Relic transactions with order metadata and terminal outcomes,
+  %   enabling alerts for abnormal aborted-order rates and dashboards for checkout volume, success, and failure trends.
+  % Future/search architecture bullet: Sphinx deprecation project, search architecture tradeoffs,
+  % Elasticsearch migration decisions, and implementation impact once shipped/measured.
+\end{itemize}
+
+\subsubsection*{%
+  \textbf{Software Engineer} at \href{https://www.achievers.com/}{Achievers}, Toronto
+  \hfill
+  \textit{November 2022 - October 2025}
+}
+\begin{itemize}
+  \item Created reusable GraphQL endpoints with Fastify, Node.js, and TypeScript, serving as a gateway and data aggregation layer between gRPC microservices, legacy REST APIs, and front-end applications.
+  \item Utilized Google Cloud Platform (GCP) services including Kubernetes Engine, Artifact Registry, Pub/Sub, gRPC, Cloud Storage Buckets, and Secret Manager for application deployment, communication, and storage.
+  \item Maintained highly available order processing and vendor integration services for a marketplace platform handling 10+ orders/min (\$10M+ 2024 revenue), resolving critical production issues within SLAs.
 \end{itemize}
 
 \subsubsection*{%
@@ -63,14 +77,8 @@ collaborative environment that offers meaningful work and opportunities for cont
   \textit{November 2021 - November 2022}
 }
 \begin{itemize}
-  \item Developed multiple web applications using Python, Django, HTML, CSS, and JavaScript, with PostgreSQL as the database.
-    This was part of an initiative to reduce paperwork and optimize business processes.
-    \item Developed a centralized RESTful API to handle authentication across multiple web applications, internally connecting to an
-    LDAP Active Directory user database, using Flask and Python.
-  \item Designed and implemented a temperature and humidity monitoring system in glass assembly plants using LoraWAN.
-    Led the entire hardware selection, configuration, and installation process, and developed a real-time
-    dashboard using Python, Django Channels, Websockets, HTML, JavaScript, and CSS.
-  \item Played a major role in containerizing applications and deploying in bare-metal on-premise servers using Docker and Docker Compose.
+  \item Developed web applications using Python, Django, JavaScript, and PostgreSQL to reduce paperwork and optimize business processes; built a centralized Flask REST API for LDAP-backed authentication.
+  \item Designed and implemented a LoRaWAN temperature and humidity monitoring system for glass assembly plants, including hardware selection, installation, and a real-time Django Channels dashboard.
 \end{itemize}
 
 % Education
@@ -83,10 +91,10 @@ collaborative environment that offers meaningful work and opportunities for cont
 % Skills
 \subsection*{Skills}
 \begin{itemize}
-  \item \textbf{Languages:} Python, JavaScript, SQL, TypeScript, PHP, HTML, CSS.
+  \item \textbf{Languages:} Python, Go, JavaScript, SQL, TypeScript, PHP, HTML, CSS.
   \item \textbf{Frameworks:} Flask, FastAPI, Django, GraphQL, React.
-  \item \textbf{Cloud \& DevOps:} Google Cloud Platform (GCP), AWS, DroneCI, GitHub Actions.
-  \item \textbf{Technologies:} MySQL, PostgreSQL, Redis, GRPC, PubSub, Docker, Kubernetes.
+  \item \textbf{Cloud \& DevOps:} Google Cloud Platform (GCP), AWS, DroneCI, GitHub Actions, Airflow.
+  \item \textbf{Technologies:} MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch, gRPC, Pub/Sub, Docker, Kubernetes, New Relic.
 \end{itemize}
 
 % TODO: Projects section
