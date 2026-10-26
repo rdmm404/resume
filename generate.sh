@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Create web directory if it doesn't exist
 mkdir -p web
@@ -19,7 +20,12 @@ for tex_file in resumes/*.tex; do
     fi
 
     echo "Converting $tex_file to $output_file"
-    pandoc -s "$tex_file" \
+    # Pandoc does not understand adjustwidth's length arguments. Translate the
+    # PDF-only indentation into a quote block, which preserves grouping in HTML.
+    sed -E \
+        -e 's/\\begin\{adjustwidth\}\{[^}]*\}\{[^}]*\}/\\begin{quote}/g' \
+        -e 's/\\end\{adjustwidth\}/\\end{quote}/g' \
+        "$tex_file" | pandoc -s --from=latex \
         --template template.html \
         -V "pdf_name=$filename" \
         -o "$output_file"

@@ -3,11 +3,15 @@
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
-\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{changepage}
 
 \geometry{margin=0.65in}
-\setlist[itemize]{left=0pt, itemsep=0pt}
-\subsubsectionfont{\normalfont}
+\setlist[itemize]{left=0pt, itemsep=0pt, parsep=0pt, topsep=4pt}
+\titleformat{\section}{\normalfont\Large\bfseries\centering}{}{0pt}{}
+\titleformat{\subsubsection}{\normalfont}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{10pt}{5pt}
+\titlespacing*{\subsubsection}{0pt}{7pt}{4pt}
 
 \begin{document}
 \pagestyle{empty}
@@ -26,30 +30,34 @@
 
 % Professional Summary
 \subsection*{Summary}
-Software Engineer with 4+ years of experience building scalable cloud microservices and full-stack web applications.
+Senior Software Engineer with 4+ years of experience building scalable cloud microservices and full-stack web applications.
 Skilled at translating business requirements into reliable product workflows using Python, Go, TypeScript, React,
 GraphQL, and modern CI/CD practices.
 % Work Experience
 \subsection*{Work Experience}
 
 \subsubsection*{%
-  \textbf{Intermediate Software Engineer} at \href{https://www.achievers.com/}{Achievers}, Toronto
-  \hfill
-  \textit{October 2025 - Present}
+  \textbf{\href{https://www.achievers.com/}{Achievers}, Toronto}
+  \hfill\textit{November 2022 - Present}
 }
+\begin{adjustwidth}{1em}{0pt}
+\noindent\textbf{Senior Software Engineer}
+\hfill\textit{October 2026 - Present}\\
+\textbf{Intermediate Software Engineer}
+\hfill\textit{October 2025 - October 2026}
 \begin{itemize}
-  \item Design, develop, and maintain cloud-based Python and Go microservices for a global B2B SaaS, using GCP, gRPC, Pub/Sub, and Kubernetes (GKE) for scalable service communication and deployment.
-  \item Contributed heavily to design and implementation of a resilient top-up checkout workflow, building Python backend flows, a Go-based Avalara tax integration, Stripe payment handling, and saga-style distributed transaction coordination.
+  \item Develop and maintain Python and Go microservices for a global B2B SaaS platform using GCP, gRPC, Pub/Sub, and Kubernetes (GKE).
+  \item Co-designed and implemented a resilient top-up checkout workflow with Python backend flows, Go-based Avalara tax integration, Stripe payments, and saga-style distributed transaction coordination.
   % Add captured revenue metric once available.
   % Interview details: fallback polling jobs, checkout queue state machine, Pub/Sub redelivery, DLT management,
   % UUID deduplication, simultaneous checkout locks across devices, abort/refund paths.
   % TODO: Consider splitting into design + implementation bullets for payment/platform-focused roles.
-  \item Contributed to Elasticsearch indexing pipeline simplification, helping evaluate architecture tradeoffs and implementing Go batch processor workers, queue tuning, and Airflow/Dataflow orchestration changes that reduced cluster CPU by ~30\% and memory pressure by ~20\% while keeping search latency under 200ms.
+  \item Helped simplify the Elasticsearch indexing pipeline through architecture evaluation, Go batch workers, queue tuning, and Airflow/Dataflow changes; reduced cluster CPU by approximately 30\% and memory pressure by approximately 20\%, with search latency under 200ms.
   % \item Partnered with SRE to optimize Elasticsearch index mappings by removing unused indexed fields, correcting data types,
   %   and preventing unwanted extra fields, reducing UAT cluster memory pressure by 50\%+ ahead of production rollout.
-  \item Built internal AI tooling with a RAG pipeline and MCP server for vendor API documentation, retrieval, and JSON config validation, reducing vendor integration timelines from 4 weeks to 3 and helping the team exceed its annual integration goal by 20\% (12/10).
-  \item Improved New Relic observability for Elasticsearch data sync queues with custom queue-state events, backlog alerts, and dashboards; implementation pattern was later standardized in the shared batch processing library.
-  \item Mentored 2 co-op software engineers through onboarding and project delivery, providing code reviews, pair programming support, and technical guidance across marketplace backend services.
+  \item Built a RAG pipeline and MCP server for vendor API documentation retrieval and JSON config validation, cutting integration timelines from 4 weeks to 3 and helping the team exceed its annual integration goal by 20\%.
+  \item Improved New Relic observability for Elasticsearch data sync queues with custom queue-state events, backlog alerts, and dashboards; the implementation pattern was later standardized in the shared batch processing library.
+  \item Mentored 2 co-op engineers through onboarding and project delivery with code reviews, pair programming, and backend technical guidance.
   % Optional AI leadership bullet:
   % \item Contributed marketplace-focused AI skills and checkout triage runbooks to an internal skill marketplace,
   %   and hosted team knowledge-transfer sessions to improve AI-assisted development and production support workflows.
@@ -60,19 +68,18 @@ GraphQL, and modern CI/CD practices.
   % Elasticsearch migration decisions, and implementation impact once shipped/measured.
 \end{itemize}
 
-\subsubsection*{%
-  \textbf{Software Engineer} at \href{https://www.achievers.com/}{Achievers}, Toronto
-  \hfill
-  \textit{November 2022 - October 2025}
-}
+\smallskip
+\noindent\textbf{Software Engineer}
+\hfill\textit{November 2022 - October 2025}
 \begin{itemize}
   \item Developed React components across Single SPA micro frontends, collaborating with Product and UX on Figma-based workflows while integrating GraphQL gateway endpoints with backend microservices.
   \item Maintained highly available order processing and vendor integration services for a marketplace platform handling 10+ orders/min (\$10M+ 2024 revenue), resolving critical production issues within SLAs.
   \item Integrated external APIs including NetSuite and Akeneo to streamline product merchandising workflows, improving pipeline efficiency by 66.6\%; optimized MySQL and Redis-backed service performance.
 \end{itemize}
+\end{adjustwidth}
 
 \subsubsection*{%
-  \textbf{Web Developer} at \href{https://www.tecnoglass.com/en/}{Tecnoglass}, Colombia
+  \textbf{Web Developer} at \href{https://www.tecnoglass.com/en/}{\textbf{Tecnoglass}}, Colombia
   \hfill
   \textit{November 2021 - November 2022}
 }
@@ -83,10 +90,8 @@ GraphQL, and modern CI/CD practices.
 
 % Education
 \subsection*{Education}
-\subsubsection*{\textbf{B.Sc. in Electronic Engineering} from Universidad del Norte, Colombia \hfill \textit{Graduated March 2023}}
-\begin{itemize}
-  \item Graduated cum laude in recognition of the excellence of my final thesis and academic performance.
-\end{itemize}
+\subsubsection*{\textbf{B.Sc. in Electronic Engineering, cum laude} \hfill \textit{March 2023}}
+\noindent Universidad del Norte, Colombia
 
 % Skills
 \subsection*{Skills}
