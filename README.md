@@ -15,6 +15,12 @@ Pull requests compile PDFs and HTML without publishing. Both outputs are
 available as workflow artifacts. The workflow can also be run manually from the
 Actions tab; only runs on `main` publish.
 
+PDFs are compiled with Tectonic 0.17.0, which downloads the required LaTeX
+packages automatically and handles repeat passes. Actions caches its verified
+binary and downloaded packages between builds. Pandoc is installed through APT.
+New pushes to a PR cancel its outdated runs; publishing runs on `main` are not
+interrupted by newer pushes.
+
 Stable download links:
 
 - [General resume](https://github.com/rdmm404/resume/releases/latest/download/main.pdf)
@@ -27,15 +33,15 @@ needed.
 
 ## Local builds (optional)
 
-Install TeX Live with the base, recommended, and extra LaTeX packages, then run:
+Install Tectonic (0.17.0 to match CI), then run:
 
 ```bash
 mkdir -p build/pdf
 for source in resumes/*.tex; do
-  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build/pdf "$source"
-  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build/pdf "$source"
+  tectonic --outdir build/pdf "$source"
 done
 ```
 
 To generate the website, install Pandoc and run `bash generate.sh`.
+The first Tectonic build needs internet access to download LaTeX packages.
 Build output and local PDFs are ignored by Git.
