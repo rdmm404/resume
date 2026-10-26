@@ -1,4 +1,4 @@
-name: Publish Resume to GH Pages
+name: Build and Publish Resume
 
 on:
   push:
@@ -7,31 +7,99 @@ on:
     paths:
       - 'resumes/*.tex'
       - 'template.html'
+      - 'generate.sh'
+      - '.github/workflows/publish_pages.yml'
+  pull_request:
+    paths:
+      - 'resumes/*.tex'
+      - 'template.html'
+      - 'generate.sh'
+      - '.github/workflows/publish_pages.yml'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: resume-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v4
 
-      - name: Install Pandoc
+      - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y --no-install-recommends pandoc texlive-latex-base texlive-latex-recommended texlive-latex-extra
+
+      - name: Compile PDFs
+        run: |
+          mkdir -p build/pdf
+          for source in resumes/*.tex; do
+            pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build/pdf "$source"
+            pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build/pdf "$source"
+          done
 
       - name: Convert LaTeX to HTML
+        run: bash generate.sh
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdfs
+          path: build/pdf/*.pdf
+          if-no-files-found: error
+
+      - name: Upload website
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-website
+          path: web/
+          if-no-files-found: error
+
+  publish:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download PDFs
+        uses: actions/download-artifact@v4
+        with:
+          name: resume-pdfs
+          path: pdfs
+
+      - name: Download website
+        uses: actions/download-artifact@v4
+        with:
+          name: resume-website
+          path: web
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
         run: |
-          chmod +x generate.sh
-          ./generate.sh
+          tag="resume-${COMMIT_SHA}"
+          if gh release view "$tag" > /dev/null 2>&1; then
+            gh release upload "$tag" pdfs/*.pdf --clobber
+            gh release edit "$tag" --latest
+          else
+            gh release create "$tag" pdfs/*.pdf \
+              --target "$COMMIT_SHA" \
+              --title "Resume ${COMMIT_SHA:0:7}" \
+              --notes "PDFs compiled automatically from commit ${COMMIT_SHA}." \
+              --latest
+          fi
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./web

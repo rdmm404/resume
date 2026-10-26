@@ -7,3 +7,5 @@
 **/*.synctex
 .DS_Store
 web
+build/
+resumes/*.pdf
